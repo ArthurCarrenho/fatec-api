@@ -405,52 +405,33 @@ export default class Account {
         cookie: this.cookie,
         route: Network.ROUTES.PARTIAL_GRADES,
         scrapper: ($) => {
-          const tag = $("[name=GXState]");
+          const tag = $("[name=xGXState]");
           let data = $("[name=GXState]").val();
-          data = JSON.parse(data.replace(/\\>/g, "&gt")).Acd_alunonotasparciais_sdt;
+          data = JSON.parse(data.replace(/\\>/g, "&gt")).vACD_ALUNONOTASPARCIAISRESUMO_SDT;
           this.student.setPartialGrades(data.map((line) => {
-            let disciplineState;
-            const approved: boolean = Parser.nBoolean(line["ACD_AlunoHistoricoItemAprovada"]);
-            const quited: boolean = +Parser.strDate(line["ACD_AlunoHistoricoItemDesistenciaData"]) !== 0;
-
-            if (quited) {
-              disciplineState = "quited";
-            } else if (approved) {
-              disciplineState = "approved";
-            } else {
-              disciplineState = "attending";
-            }
-
             const discipline = new Discipline({
-              classroomId: line["ACD_AlunoHistoricoItemTurmaId"],
               code: line["ACD_DisciplinaSigla"],
-              courseId: line["ACD_CursoId"],
               frequency: line["ACD_AlunoHistoricoItemFrequencia"],
               grade: line["ACD_AlunoHistoricoItemMediaFinal"],
               name: line["ACD_DisciplinaNome"],
-              periodId: line["ACD_Periodoid"],
-              quitDate: Parser.strDate(line["ACD_AlunoHistoricoItemDesistenciaData"]),
-              state: disciplineState,
-              teacherId: line["ACD_AlunoHistoricoItemProfessorId"],
             });
-
             return {
               discipline,
-              evaluations: line["Avaliacoes"].map((evaluation) => {
+              evaluations: line["Datas"].map((evaluation) => {
                 return new Evaluation({
-                  applyDates: {
-                    applied: Parser.strDate(evaluation["ACD_PlanoEnsinoAvaliacaoDataProva"]),
-                    predicted: Parser.strDate(evaluation["ACD_PlanoEnsinoAvaliacaoDataPrevista"]),
-                    published: Parser.strDate(evaluation["ACD_PlanoEnsinoAvaliacaoDataPublicacao"]),
-                  },
+                  // applyDates: {
+                  //   applied: Parser.strDate(evaluation["ACD_PlanoEnsinoAvaliacaoDataProva"]),
+                  //   predicted: Parser.strDate(evaluation["ACD_PlanoEnsinoAvaliacaoDataPrevista"]),
+                  //   published: Parser.strDate(evaluation["ACD_PlanoEnsinoAvaliacaoDataPublicacao"]),
+                  // },
                   code: evaluation["ACD_PlanoEnsinoAvaliacaoSufixo"],
                   description: evaluation["ACD_PlanoEnsinoAvaliacaoDescricao"],
-                  grades: evaluation.Notas.map((grade) => {
-                    return {
-                      date: Parser.strDate(grade["ACD_PlanoEnsinoAvaliacaoParcialDataLancamento"]),
-                      score: grade["ACD_PlanoEnsinoAvaliacaoParcialNota"],
-                    };
-                  }),
+                  // grades: evaluation.Notas.map((grade) => {
+                  //   return {
+                  //     date: Parser.strDate(grade["ACD_PlanoEnsinoAvaliacaoParcialDataLancamento"]),
+                  //     score: grade["vACD_PLANOENSINOAVALIACAOPARCIALNOTA"],
+                  //   };
+                  // }),
                   title: evaluation["ACD_PlanoEnsinoAvaliacaoTitulo"],
                   weight: Parser.strNumber(evaluation["ACD_PlanoEnsinoAvaliacaoPeso"]),
                 });

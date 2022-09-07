@@ -17,17 +17,14 @@ export default class Evaluation {
   private grades: IGrade[];
   private applyDates: IApplyDate;
 
-  constructor ({ applyDates, code, description, grades, title, weight }: {
-    applyDates: IApplyDate,
+  constructor ({ code, description, title, weight }: {
     code: string,
     description: string,
-    grades: IGrade[],
+    // grades: IGrade[],
     title: string,
     weight: number,
   }) {
-    this.applyDates = applyDates;
     this.description = description;
-    this.grades = grades;
     this.code = code;
     this.title = title;
     this.weight = weight;
