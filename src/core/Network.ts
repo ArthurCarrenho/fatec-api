@@ -20,7 +20,7 @@ export default class Network {
   };
 
   public static getCookieFromResponse (response: any): string {
-    return response.hasOwnProperty("headers") ? response.headers["set-cookie"].join(";") : "";
+    return true ? response.headers["set-cookie"].join(";") : "";
   }
 
   public static scrap ({ cookie, route, scrapper }: {cookie: string, route: string, scrapper: (object) => void}): any {
@@ -36,7 +36,7 @@ export default class Network {
     let promise = Promise.resolve("");
     if (!cookie) {
       promise = promise.then(() => {
-        throw new Error("Missing cookie, try logging in");
+        throw new Error("Erro ao logar, verifique as credenciais");
       });
     }
     return promise.then(() => {

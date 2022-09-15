@@ -77,7 +77,7 @@ export default class Account {
 
         this.state = Account.STATES.DENIED;
         const $ = cheerio.load(html);
-        return Promise.reject(new Error($(".ErrorViewer").map((i, e) => $(e).text()).get().join("\n")));
+        return {erro: "Login invalido"};
       });
   }
 
