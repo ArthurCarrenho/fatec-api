@@ -14,19 +14,23 @@ export default class Evaluation {
   private code: string;
   private title: string;
   private description: string;
-  private grades: IGrade[];
+  private grade: any;
+  private releaseDate: string;
   private applyDates: IApplyDate;
 
-  constructor ({ code, description, title, weight }: {
+  constructor ({ code, description, grade, releaseDate, title, weight }: {
     code: string,
     description: string,
-    // grades: IGrade[],
+    grade: any,
+    releaseDate: any,
     title: string,
     weight: number,
   }) {
     this.description = description;
     this.code = code;
     this.title = title;
+    this.grade = grade;
+    this.releaseDate = releaseDate;
     this.weight = weight;
   }
 
@@ -63,11 +67,11 @@ export default class Evaluation {
   }
 
   public setGrades (grades: IGrade[]): void {
-    this.grades = grades;
+    this.grade = grades;
   }
 
   public getGrades (): IGrade[] {
-    return this.grades;
+    return this.grade;
   }
 
   public setApplyDates (applydates: IApplyDate): void {

@@ -408,6 +408,7 @@ export default class Account {
           const tag = $("[name=xGXState]");
           let data = $("[name=GXState]").val();
           data = JSON.parse(data.replace(/\\>/g, "&gt")).vACD_ALUNONOTASPARCIAISRESUMO_SDT;
+          // console.log(JSON.stringify(data));
           this.student.setPartialGrades(data.map((line) => {
             const discipline = new Discipline({
               code: line["ACD_DisciplinaSigla"],
@@ -418,6 +419,19 @@ export default class Account {
             return {
               discipline,
               evaluations: line["Datas"].map((evaluation) => {
+                let grade;
+
+                if (typeof(evaluation["Avaliacoes"][0]) === "undefined") {
+                   grade = {
+                     grade: "",
+                     releaseDate: "",
+                  };
+                } else {
+                  grade = {
+                    grade: evaluation["Avaliacoes"][0]["ACD_PlanoEnsinoAvaliacaoParcialNota"],
+                    releaseDate: evaluation["Avaliacoes"][0]["ACD_PlanoEnsinoAvaliacaoParcialDataLancamento"],
+                  };
+                }
                 return new Evaluation({
                   // applyDates: {
                   //   applied: Parser.strDate(evaluation["ACD_PlanoEnsinoAvaliacaoDataProva"]),
@@ -429,9 +443,11 @@ export default class Account {
                   // grades: evaluation.Notas.map((grade) => {
                   //   return {
                   //     date: Parser.strDate(grade["ACD_PlanoEnsinoAvaliacaoParcialDataLancamento"]),
-                  //     score: grade["vACD_PLANOENSINOAVALIACAOPARCIALNOTA"],
+                  //     score: grade["ACD_PlanoEnsinoAvaliacaoParcialNota"],
                   //   };
                   // }),
+                  grade: grade["grade"],
+                  releaseDate: grade["releaseDate"],
                   title: evaluation["ACD_PlanoEnsinoAvaliacaoTitulo"],
                   weight: Parser.strNumber(evaluation["ACD_PlanoEnsinoAvaliacaoPeso"]),
                 });
