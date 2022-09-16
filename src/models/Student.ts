@@ -47,6 +47,7 @@ export default class Student {
 
   private averageGrade: number;
   private name: string;
+  private avisos: string;
   private birthday: Date;
   private code: string;
   private course: string;
@@ -149,6 +150,14 @@ export default class Student {
 
   public getName (): string {
     return this.name;
+  }
+
+  public setAvisos (avisos: string): void {
+    this.avisos = avisos;
+  }
+
+  public getAvisos (): string {
+    return this.avisos;
   }
 
   public setRegisteredEmails (registeredEmails: IRegisteredEmail[]): void {

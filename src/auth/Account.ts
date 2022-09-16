@@ -97,6 +97,24 @@ export default class Account {
     });
   }
 
+  public getAvisos (): Promise<string> {
+    const prom = this.checkCookie();
+
+    return prom.then(() => {
+      return Network.scrap({
+        cookie: this.cookie,
+        route: Network.ROUTES.HOME,
+        scrapper: ($) => {
+          const html = String($("#TABLE100_MPAGE").html().replace(`img src="`,
+          `img src="https://siga.cps.sp.gov.br/aluno/`))
+           || "" ;
+          this.student.setAvisos(html);
+          return this.student.getAvisos();
+        },
+      });
+    });
+  }
+
   public getProfile (): Promise<object> {
     const prom = this.checkCookie();
 
@@ -423,7 +441,7 @@ export default class Account {
 
                 if (typeof(evaluation["Avaliacoes"][0]) === "undefined") {
                    grade = {
-                     grade: "",
+                     grade: -1,
                      releaseDate: "",
                   };
                 } else {

@@ -100,38 +100,17 @@ describe("fatec-api", () => {
       return account.getPartialGrades().then((partialGrades) => {
         if (partialGrades.length) {
           for (const partialGrade of partialGrades) {
-            expect(partialGrade).to.have.property("discipline");
-            expect(partialGrade).to.have.property("evaluations");
-            expect(partialGrade.discipline).to.be.an.instanceof(Discipline);
-
-            studentDisciplines.push(partialGrade.discipline);
-
-            expect(partialGrade.evaluations).to.be.an("array");
-            expect(partialGrade.discipline.getGrade()).to.be.a("number");
-            expect(partialGrade.discipline.getFrequency()).to.be.a("number");
-
-            for (const evaluation of partialGrade.evaluations) {
-              expect(evaluation).to.be.an.instanceof(Evaluation);
-              expect(evaluation.applyDates).to.be.an("object");
-              expect(evaluation.code).to.be.a("string");
-              expect(evaluation.description).to.be.a("string");
-              expect(evaluation.grades).to.be.an("array");
-              expect(evaluation.title).to.be.a("string");
-              expect(evaluation.weight).to.be.a("number");
-              expect(evaluation.applyDates).to.have.property("predicted");
-              expect(evaluation.applyDates).to.have.property("applied");
-              expect(evaluation.applyDates).to.have.property("published");
-              expect(evaluation.applyDates.predicted).to.be.an.instanceof(Date);
-              expect(evaluation.applyDates.applied).to.be.an.instanceof(Date);
-              expect(evaluation.applyDates.published).to.be.an.instanceof(Date);
-
-              for (const grade of evaluation.grades) {
-                expect(grade).to.have.property("date");
-                expect(grade).to.have.property("score");
-                expect(grade.date).to.be.an.instanceof(Date);
-                expect(grade.score).to.be.a("number");
+              expect(partialGrade.discipline.name).to.be.a("string");
+              expect(partialGrade.discipline.code).to.be.a("string");
+              expect(partialGrade.discipline.frequency).to.be.a("number");
+              expect(partialGrade.discipline.grade).to.be.a("number");
+              expect(partialGrade.evaluations).to.be.a("array");
+              for (const evaluation of partialGrade.evaluations) {
+                expect(evaluation.title).to.be.a("string");
+                expect(evaluation.grade).to.be.a("number");
+                expect(evaluation.releaseDate).to.be.a("string");
+                expect(evaluation.weight).to.be.a("number");
               }
-            }
           }
         }
       });
