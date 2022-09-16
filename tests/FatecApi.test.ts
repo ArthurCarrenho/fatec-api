@@ -255,45 +255,6 @@ describe("fatec-api", () => {
         }
       }
     });
-    it("should get it partial grades", () => {
-      const partialGrades = account.student.getPartialGrades();
-      if (partialGrades.length) {
-        for (const partialGrade of partialGrades) {
-          expect(partialGrade).to.have.property("discipline");
-          expect(partialGrade).to.have.property("evaluations");
-          expect(partialGrade.discipline).to.be.an.instanceof(Discipline);
-
-          studentDisciplines.push(partialGrade.discipline);
-
-          expect(partialGrade.evaluations).to.be.an("array");
-          expect(partialGrade.discipline.getGrade()).to.be.a("number");
-          expect(partialGrade.discipline.getFrequency()).to.be.a("number");
-
-          for (const evaluation of partialGrade.evaluations) {
-            expect(evaluation).to.be.an.instanceof(Evaluation);
-            expect(evaluation.applyDates).to.be.an("object");
-            expect(evaluation.code).to.be.a("string");
-            expect(evaluation.description).to.be.a("string");
-            expect(evaluation.grades).to.be.an("array");
-            expect(evaluation.title).to.be.a("string");
-            expect(evaluation.weight).to.be.a("number");
-            expect(evaluation.applyDates).to.have.property("predicted");
-            expect(evaluation.applyDates).to.have.property("applied");
-            expect(evaluation.applyDates).to.have.property("published");
-            expect(evaluation.applyDates.predicted).to.be.an.instanceof(Date);
-            expect(evaluation.applyDates.applied).to.be.an.instanceof(Date);
-            expect(evaluation.applyDates.published).to.be.an.instanceof(Date);
-
-            for (const grade of evaluation.grades) {
-              expect(grade).to.have.property("date");
-              expect(grade).to.have.property("score");
-              expect(grade.date).to.be.an.instanceof(Date);
-              expect(grade.score).to.be.a("number");
-            }
-          }
-        }
-      }
-    });
     it("should have enrolled disciplines", () => {
       const enrolledDisciplines = account.student.getEnrolledDisciplines();
       expect(enrolledDisciplines.length === studentDisciplines.length);
@@ -374,7 +335,6 @@ describe("fatec-api", () => {
         expect(semester).to.have.property("disciplines");
         if (semester.disciplines.length) {
           for (const discipline of semester.disciplines) {
-            console.log(discipline)
             expect(["approved", "attending", "not-attended", "dismissed", "dismissed-ae"]).to.contain(discipline.getState());
           }
         }
