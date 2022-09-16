@@ -10,18 +10,16 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      LOGIN: ${{ secrets.LOGIN }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      NAME: ${{ secrets.NAME }}
 
     strategy:
       matrix:
         node-version: [14.x]
 
     steps:
-      - name: create env file
-        run: |
-          touch .env
-          echo NAME=${{ secrets.NAME }} >> .env
-          echo LOGIN=${{ secrets.LOGIN }} >> .env
-          echo PASSWORD=${{ secrets.PASSWORD }} >> .env
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
