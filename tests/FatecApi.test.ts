@@ -374,7 +374,8 @@ describe("fatec-api", () => {
         expect(semester).to.have.property("disciplines");
         if (semester.disciplines.length) {
           for (const discipline of semester.disciplines) {
-            expect(["approved", "attending", "not-attended", "dismissed"]).to.contain(discipline.getState());
+            console.log(discipline)
+            expect(["approved", "attending", "not-attended", "dismissed", "dismissed-ae"]).to.contain(discipline.getState());
           }
         }
       }

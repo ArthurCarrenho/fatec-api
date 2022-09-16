@@ -1,7 +1,7 @@
 {
-  "name": "fatec-api",
-  "version": "1.5.0",
-  "description": "API for SIGA from Centro Paula Souza made for students to create things based in their profile data",
+  "name": "fatec-siga-sdk",
+  "version": "1.5.3",
+  "description": "Sdk para o Siga-FATEC, baseado no trabalho de @filipemeneses",
   "keywords": [
     "fatec",
     "fatec-api",
@@ -13,7 +13,7 @@
   "homepage": "https://filipemeneses.gitbooks.io/fatec-api",
   "repository": {
     "type": "git",
-    "url": "https://github.com/filipemeneses/fatec-api.git"
+    "url": "https://github.com/arthurcarrenho/fatec-siga-sdk.git"
   },
   "main": "dist/fatec-api.min.js",
   "types": "types/index.d.ts",
@@ -32,7 +32,7 @@
     "changelog:minor": "changelog -m",
     "changelog:patch": "changelog -p"
   },
-  "author": "Filipe Meneses <flcmeneses@gmail.com>",
+  "author": "Arthur Carrenho <roxis@hotmail.com.br>",
   "license": "ISC",
   "devDependencies": {
     "@types/chai": "4.0.8",

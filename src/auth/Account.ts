@@ -130,7 +130,7 @@ export default class Account {
             averageGrade: Parser.strNumber(data[`${prefix}vACD_ALUNOCURSOINDICEPR`]),
             code: data[`${prefix}vACD_ALUNOCURSOREGISTROACADEMICOCURSO`],
             course: data["vACD_CURSONOME_MPAGE"],
-            name: data[`${prefix}vPRO_PESSOALNOME`],
+            name: data[`${prefix}vPRO_PESSOALNOME`].replace(" -", ""),
             period: data["vACD_PERIODODESCRICAO_MPAGE"],
             progress: Parser.strNumber(data[`${prefix}vACD_ALUNOCURSOINDICEPP`]),
             unit: data["vUNI_UNIDADENOME_MPAGE"],
@@ -242,6 +242,7 @@ export default class Account {
               const stateCodes = {
                 "#418a58": "dismissed",
                 "#75fa9f": "approved",
+                "#96ffd2": "dismissed-ae",
                 "#b2d4fd": "attending",
                 "#ffffff": "not-attended",
               };
