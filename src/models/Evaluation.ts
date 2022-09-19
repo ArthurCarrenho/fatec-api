@@ -14,14 +14,14 @@ export default class Evaluation {
   private code: string;
   private title: string;
   private description: string;
-  private grade: any;
+  private grade: object;
   private releaseDate: string;
   private applyDates: IApplyDate;
 
   constructor ({ code, description, grade, releaseDate, title, weight }: {
     code: string,
     description: string,
-    grade: any,
+    grade: object,
     releaseDate: any,
     title: string,
     weight: number,
@@ -66,11 +66,11 @@ export default class Evaluation {
     return this.description;
   }
 
-  public setGrades (grades: IGrade[]): void {
+  public setGrades (grades: object): void {
     this.grade = grades;
   }
 
-  public getGrades (): IGrade[] {
+  public getGrades (): object {
     return this.grade;
   }
 
