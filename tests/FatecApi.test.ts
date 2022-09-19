@@ -115,6 +115,21 @@ describe("fatec-api", () => {
         }
       });
     });
+    it("calendário de provas", () => {
+      return account.getCalendarioProvas().then((calendarioProvas) => {
+        if (calendarioProvas.length) {
+          for (const cp of calendarioProvas) {
+              expect(cp.cod).to.be.a("string");
+              expect(cp.nome).to.be.a("string");
+              expect(cp.aval).to.be.a("array");
+              for (const aval of cp.aval) {
+                expect(aval.data).to.be.a("string");
+                expect(aval.name).to.be.a("string");
+              }
+          }
+        }
+      });
+    });
     it("should have enrolled disciplines", () => {
       return account.getEnrolledDisciplines().then((disciplines) => {
         accountDisciplines = disciplines;

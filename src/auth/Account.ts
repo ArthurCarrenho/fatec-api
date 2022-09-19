@@ -137,8 +137,8 @@ export default class Account {
          for (let i = 0; i < disci.length; i++) {
             cd.push({
               aval: cprova[i],
-              cod: disci[i][1],
-              nome: disci[i][0],
+              cod: disci[i][0],
+              nome: disci[i][1],
             });
           }
          return (cd);
