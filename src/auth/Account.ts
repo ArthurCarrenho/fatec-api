@@ -128,7 +128,7 @@ export default class Account {
           const cpp = [];
           for (const iterator of JSON.parse(this.attribs.value)) {
             cpp.push({
-              data: iterator[2],
+              data: iterator[2].replace("  /  /   ", ""),
               name: iterator[1],
             });
           }
@@ -141,7 +141,7 @@ export default class Account {
               nome: disci[i][0],
             });
           }
-         return (cd[2]);
+         return (cd);
         },
       });
     });
