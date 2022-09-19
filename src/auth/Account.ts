@@ -450,19 +450,8 @@ export default class Account {
                   };
                 }
                 return new Evaluation({
-                  // applyDates: {
-                  //   applied: Parser.strDate(evaluation["ACD_PlanoEnsinoAvaliacaoDataProva"]),
-                  //   predicted: Parser.strDate(evaluation["ACD_PlanoEnsinoAvaliacaoDataPrevista"]),
-                  //   published: Parser.strDate(evaluation["ACD_PlanoEnsinoAvaliacaoDataPublicacao"]),
-                  // },
                   code: evaluation["ACD_PlanoEnsinoAvaliacaoSufixo"],
                   description: evaluation["ACD_PlanoEnsinoAvaliacaoDescricao"],
-                  // grades: evaluation.Notas.map((grade) => {
-                  //   return {
-                  //     date: Parser.strDate(grade["ACD_PlanoEnsinoAvaliacaoParcialDataLancamento"]),
-                  //     score: grade["ACD_PlanoEnsinoAvaliacaoParcialNota"],
-                  //   };
-                  // }),
                   grade: grade["grade"],
                   releaseDate: grade["releaseDate"],
                   title: evaluation["ACD_PlanoEnsinoAvaliacaoTitulo"],
