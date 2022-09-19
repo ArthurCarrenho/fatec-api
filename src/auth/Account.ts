@@ -10,7 +10,6 @@ import Schedule from "models/Schedule";
 import SchoolGrade from "models/SchoolGrade";
 import Student from "models/Student";
 import { EmailIntegration } from "models/Student";
-import * as util from "util";
 
 export default class Account {
 
@@ -110,6 +109,39 @@ export default class Account {
            || "" ;
           this.student.setAvisos(html);
           return this.student.getAvisos();
+        },
+      });
+    });
+  }
+
+  public getCalendarioProvas (): Promise<string> {
+    const prom = this.checkCookie();
+    const cprova = [];
+    const cd = [];
+    return prom.then(() => {
+      return Network.scrap({
+        cookie: this.cookie,
+        route: Network.ROUTES.CALENDARIO_PROVAS,
+        scrapper: ($) => {
+         const disci = JSON.parse($(('input[name="Grid1ContainerDataV"]'))[0].attribs.value.replace(/"",/g, ""));
+         $('input[name^="Grid2ContainerDataV_"]').each(function () {
+          const cpp = [];
+          for (const iterator of JSON.parse(this.attribs.value)) {
+            cpp.push({
+              data: iterator[2],
+              name: iterator[1],
+            });
+          }
+          cprova.push(cpp);
+          });
+         for (let i = 0; i < disci.length; i++) {
+            cd.push({
+              aval: cprova[i],
+              cod: disci[i][1],
+              nome: disci[i][0],
+            });
+          }
+         return (cd[2]);
         },
       });
     });

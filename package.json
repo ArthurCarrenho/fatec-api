@@ -1,6 +1,6 @@
 {
   "name": "fatec-siga-sdk",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "description": "Sdk para o Siga-FATEC, baseado no trabalho de @filipemeneses",
   "keywords": [
     "fatec",
