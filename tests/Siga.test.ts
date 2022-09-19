@@ -87,7 +87,7 @@ describe("siga", () => {
   describe("partial grades", () => {
     let $partialGrades: any = null;
     let data: any;
-    let evaluations = [];
+    let datas = [];
     const grades = [];
     before((done) => {
       Network.get({
@@ -104,39 +104,29 @@ describe("siga", () => {
       expect(tag).to.have.lengthOf(1);
       expect(data).to.be.a("string");
       data = Parser.parseGxState(data);
-      expect(data).to.have.property("Acd_alunonotasparciais_sdt");
+      expect(data).to.have.property("vACD_ALUNONOTASPARCIAISRESUMO_SDT");
     });
 
     it("the JSON should have list of disciplines with approval, grade, frequency," +
       " course ID, name, code and evaluations", () => {
-        expect(data.Acd_alunonotasparciais_sdt).to.be.a("array");
-        data = data.Acd_alunonotasparciais_sdt;
+        expect(data.vACD_ALUNONOTASPARCIAISRESUMO_SDT).to.be.a("array");
+        data = data.vACD_ALUNONOTASPARCIAISRESUMO_SDT;
         for (const discipline of data) {
-          expect(discipline).to.have.property("ACD_Periodoid");
-          expect(discipline).to.have.property("ACD_AlunoHistoricoItemAprovada");
-          expect(discipline).to.have.property("ACD_AlunoHistoricoItemMediaFinal");
-          expect(discipline).to.have.property("ACD_AlunoHistoricoItemFrequencia");
-          expect(discipline).to.have.property("ACD_CursoId");
-          expect(discipline).to.have.property("ACD_DisciplinaNome");
           expect(discipline).to.have.property("ACD_DisciplinaSigla");
-          expect(discipline).to.have.property("ACD_AlunoHistoricoItemTurmaId");
-          expect(discipline).to.have.property("ACD_AlunoHistoricoItemDesistenciaData");
-
-          expect(discipline).to.have.property("Avaliacoes");
-          evaluations = evaluations.concat(discipline.Avaliacoes);
+          expect(discipline).to.have.property("ACD_DisciplinaNome");
+          expect(discipline).to.have.property("ACD_AlunoHistoricoItemMediaFinal");
+          expect(discipline).to.have.property("ACD_AlunoHistoricoItemQtdFaltas");
+          expect(discipline).to.have.property("ACD_AlunoHistoricoItemFrequencia");
+          expect(discipline).to.have.property("Datas");
+          datas = datas.concat(discipline.Datas);
         }
       });
     it("evaluations should contain the JSON should have weight, code, title and description", () => {
-      for (const evaluation of evaluations) {
-        expect(evaluation.ACD_PlanoEnsinoAvaliacaoDataPrevista).to.be.a("string");
-        expect(evaluation.ACD_PlanoEnsinoAvaliacaoDataProva).to.be.a("string");
-        expect(evaluation.ACD_PlanoEnsinoAvaliacaoDataPublicacao).to.be.a("string");
-        expect(evaluation.ACD_PlanoEnsinoAvaliacaoPeso).to.be.a("string");
-        expect(evaluation.ACD_PlanoEnsinoAvaliacaoSufixo).to.be.a("string");
-        expect(evaluation.ACD_PlanoEnsinoAvaliacaoTitulo).to.be.a("string");
-        expect(evaluation.ACD_PlanoEnsinoAvaliacaoDescricao).to.be.a("string");
-        expect(evaluation.Notas).to.be.a("array");
-        for (const grade of evaluation.Notas) {
+      for (const data of datas) {
+        expect(data.ACD_PlanoEnsinoAvaliacaoTitulo).to.be.a("string");
+        expect(data.ACD_PlanoEnsinoAvaliacaoDataPrevista).to.be.a("string");
+        expect(data.Avaliacoes).to.be.a("array");
+        for (const grade of data.Avaliacoes) {
           grades.push(grade);
         }
       }
