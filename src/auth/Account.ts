@@ -388,8 +388,8 @@ export default class Account {
         route: Network.ROUTES.HOME,
         scrapper: ($) => {
           const email = $("#span_vPRO_PESSOALEMAIL").text();
-          const emailFatec = $("#span_vINSTITUCIONALFATEC").text();
-          const emailEtec = $("#span_vINSTITUCIONALETEC").text();
+          const emailFatec = $("#span_MPW0041vINSTITUCIONALFATEC").text();
+          const emailEtec = $("#span_MPW0041vINSTITUCIONALETEC").text();
           const emailWebsai = $("#span_vEMAILWEBSAI").text();
           this.student.setRegisteredEmails([{
               email,
@@ -408,9 +408,7 @@ export default class Account {
               integration: EmailIntegration.websai,
             },
           ]);
-          return util.deprecate(() => {
-            return this.student.getRegisteredEmails();
-          }, "Siga won't return registered emails anymore, returning a possible preferential integration instead")();
+          return this.student.getRegisteredEmails();
         },
       });
     });
