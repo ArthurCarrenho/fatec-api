@@ -421,8 +421,6 @@ export default class Account {
         scrapper: ($) => {
           const email = $("#span_vPRO_PESSOALEMAIL").text();
           const emailFatec = $("#span_MPW0041vINSTITUCIONALFATEC").text();
-          const emailEtec = $("#span_MPW0041vINSTITUCIONALETEC").text();
-          const emailWebsai = $("#span_vEMAILWEBSAI").text();
           this.student.setRegisteredEmails([{
               email,
               integration: EmailIntegration.preferential,
@@ -430,14 +428,6 @@ export default class Account {
             {
               email: emailFatec,
               integration: EmailIntegration.fatec,
-            },
-            {
-              email: emailEtec,
-              integration: EmailIntegration.etec,
-            },
-            {
-              email: emailWebsai,
-              integration: EmailIntegration.websai,
             },
           ]);
           return this.student.getRegisteredEmails();
