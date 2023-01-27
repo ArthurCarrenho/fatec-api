@@ -13,6 +13,7 @@ export default class Network {
     LOGIN: "/aluno/login.aspx",
     PARTIAL_ABSENSES: "/aluno/faltasparciais.aspx",
     PARTIAL_GRADES: "/aluno/notasparciais.aspx",
+    PLANOS: "/aluno/planoensino.aspx?",
     SCHEDULE: "/aluno/horario.aspx",
     SCHOOL_GRADE: "/aluno/historicograde.aspx",
   };

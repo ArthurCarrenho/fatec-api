@@ -114,6 +114,37 @@ export default class Account {
     });
   }
 
+  public getPlanos (disci): Promise<string> {
+    const prom = this.checkCookie();
+
+    return prom.then(() => {
+      return Network.scrap({
+        cookie: this.cookie,
+        route: Network.ROUTES.PLANOS + disci,
+        scrapper: ($) => {
+
+          return {
+            apresentacao: {
+            nome_disci: $("#span_W0005vACD_DISCIPLINANOME").text(),
+            nome_prof: $("#span_W0005vPRO_PESSOALNOME").text(),
+            ementa: $("#span_W0008W0013vACD_DISCIPLINAEMENTA").text(),
+            objetivo: $("#span_W0008W0013vACD_DISCIPLINAOBJETIVO").text(),
+            cargas: {
+              semanais: $("#span_W0008W0013vACD_DISCIPLINAAULASSEMANAIS").text().trim(),
+              teoricas: $("#span_W0008W0013vACD_DISCIPLINAAULASTEORICAS").text().trim(),
+              praticas: $("#span_W0008W0013vACD_DISCIPLINAAULASPRATICAS").text().trim(),
+              totais: $("#span_W0008W0013vACD_DISCIPLINAAULASTOTAISPERIODO").text().trim(),
+            },
+            aulas: {
+
+            },
+          },
+          };
+        },
+      });
+    });
+  }
+
   public getCalendarioProvas (): Promise<string> {
     const prom = this.checkCookie();
     const cprova = [];

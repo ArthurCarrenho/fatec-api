@@ -17,7 +17,8 @@
     "space-before-function-paren": true,
     "no-unused-expression": false,
     "radix": false,
-    "no-string-literal": false
+    "no-string-literal": false,
+    "object-literal-sort-keys": false
   },
   "rulesDirectory": []
 }
